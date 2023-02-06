@@ -13,6 +13,19 @@ public class TestPerson {
 
     String message = "Hello World";
     MessageUtil messageUtil = new MessageUtil(message);
+    JSONObject jsonObject;
+    ReadJson readJson = new ReadJson();
+
+    public void readJson() throws IOException, ParseException {
+
+        jsonObject = readJson.ReadJsonFromFile("person.json");
+        Person person = new Person(jsonObject.get("name").toString(),
+                jsonObject.get("surname").toString(), Integer.parseInt(jsonObject.get("age").toString()),
+                jsonObject.get("address").toString(), null);
+
+        Person personToTest = new Person();
+
+    }
 
     @Test
     public void testPrintMessage() {
@@ -23,7 +36,8 @@ public class TestPerson {
     @Test
     public void testAddPerson() throws IOException, ParseException {
 
-       JSONObject jsonObject;
+     /*
+     JSONObject jsonObject;
 
         ReadJson readJson = new ReadJson();
 
@@ -32,9 +46,12 @@ public class TestPerson {
         Person person = new Person(jsonObject.get("name").toString(),
                 jsonObject.get("surname").toString(), Integer.parseInt(jsonObject.get("age").toString()),
                 jsonObject.get("address").toString(), null);
-
+*/
         Person personToTest = new Person();
 
+        readJson();
+        Scanner sc = new Scanner(System.in);
+        String yourName = sc.nextLine();
         personToTest.setAge(47);
 
         assertEquals(personToTest.getAge(),47);
