@@ -1,4 +1,4 @@
-package org.labse001_1.model;
+package org.labse001_1.manager;
 
 import org.junit.jupiter.api.Test;
 import org.labse001_1.manager.StudentManager;
