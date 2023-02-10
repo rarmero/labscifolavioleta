@@ -1,4 +1,4 @@
-package org.menu;
+package org.menu.utils.command;
 
 public class CreateCommand implements Command{
     Receiver receiver;

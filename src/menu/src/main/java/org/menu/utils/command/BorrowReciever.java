@@ -1,6 +1,6 @@
-package org.menu;
+package org.menu.utils.command;
 
-public class BorrowReciever implements Receiver{
+public class BorrowReciever implements Receiver {
     @Override
     public void Create() {
         System.out.println("call menu borrow Create action");

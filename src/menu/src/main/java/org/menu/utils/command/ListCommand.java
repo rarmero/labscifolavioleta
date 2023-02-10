@@ -1,4 +1,4 @@
-package org.menu;
+package org.menu.utils.command;
 
 public class ListCommand implements Command{
     Receiver receiver;

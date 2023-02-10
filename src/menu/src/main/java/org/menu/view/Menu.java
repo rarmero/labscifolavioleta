@@ -1,10 +1,12 @@
-import org.menu.*;
+package org.menu.view;
+
+import org.menu.utils.command.*;
 
 import java.util.Scanner;
 
 public class Menu {
-    public static void main(String[] args) {
-
+    public void init()
+    {
         Scanner scanner = new Scanner(System.in);
         String optionSelected;
 
