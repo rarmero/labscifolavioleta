@@ -36,6 +36,24 @@ public class ReservationManager {
 
         return reservationFoundedList;
     }
+    
+     public List<Reservation> GetAllReservationByDatePointCharge(Date dateFrom,Date dateTo,int pointCharge){
+
+        Iterator<Reservation> iterator = this.reservationList.iterator();
+        List<Reservation> reservationFoundedList = new ArrayList<>();
+
+        while(iterator.hasNext()) {
+            Reservation reservationNext = iterator.next();
+
+            if (dateFrom.equals(reservationNext.getDateStart()) && dateTo.equals(reservationNext.getDateEnd()) && pointCharge == reservationNext.getIdPointCharge() )
+            {
+              reservationFoundedList.add(reservationNext);
+            }
+
+        }
+
+        return reservationFoundedList;
+    }
 
 }
 

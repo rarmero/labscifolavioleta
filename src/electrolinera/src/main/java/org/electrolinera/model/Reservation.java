@@ -12,5 +12,4 @@ public class Reservation {
    private int idPointCharge;
    private Date dateStart;
    private Date dateEnd;
-
 }
