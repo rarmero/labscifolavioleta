@@ -27,10 +27,9 @@ public class ReservationManager {
         while(iterator.hasNext()) {
             Reservation reservationNext = iterator.next();
 
-            if (dateFrom.equals(reservationNext.getDateStart())) {
-
-                reservationFoundedList.add(reservationNext);
-
+            if (dateFrom.equals(reservationNext.getDateStart()) && dateTo.equals(reservationNext.getDateEnd()) )
+            {
+              reservationFoundedList.add(reservationNext);
             }
 
         }

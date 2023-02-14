@@ -3,7 +3,6 @@ package org.electrolinera.manager;
 import org.electrolinera.model.Reservation;
 import org.junit.Test;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,12 +38,12 @@ public class TestReservationManager {
         List<Reservation> reservationFoundedList = new ArrayList<>();
 
         SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy");
-        Date dateStart = objSDF.parse("20-08-1023");
+        Date dateStart = objSDF.parse("20-08-2023");
+        Date dateEnd = objSDF.parse("21-08-2023");
 
-        Date dateEnd = objSDF.parse("20-08-1023");
-
-        Reservation reservation = new Reservation(12,11,dateStart,dateEnd);
-        reservationManager.reservationList.add(reservation);
+        reservationManager.reservationList.add(new Reservation(12,11,dateStart,dateEnd));
+        reservationManager.reservationList.add(new Reservation(13,14,objSDF.parse("22-08-2023"),objSDF.parse("23-08-2023")));
+        reservationManager.reservationList.add(new Reservation(13,14,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023")));
 
         reservationFoundedList =  reservationManager.GetAllReservationByDate(dateStart,dateEnd);
 
@@ -52,8 +51,11 @@ public class TestReservationManager {
        //check if some property is in the list of objects
 
         assertThat(reservationFoundedList, hasItems(
-                new Reservation(12,11,dateStart,dateEnd)
+                new Reservation(12,11,dateStart,dateEnd),
+                new Reservation(13,14,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"))
         ));
+        
+    
     }
 
 }
