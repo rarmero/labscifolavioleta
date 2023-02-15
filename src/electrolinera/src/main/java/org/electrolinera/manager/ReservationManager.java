@@ -37,7 +37,7 @@ public class ReservationManager {
         return reservationFoundedList;
     }
     
-     public List<Reservation> GetAllReservationByDatePointCharge(Date dateFrom,Date dateTo,int pointCharge){
+     public List<Reservation> GetAllReservationByDatePointCharge(Date dateFrom,Date dateTo,int idPointCharge){
 
         Iterator<Reservation> iterator = this.reservationList.iterator();
         List<Reservation> reservationFoundedList = new ArrayList<>();
@@ -45,7 +45,7 @@ public class ReservationManager {
         while(iterator.hasNext()) {
             Reservation reservationNext = iterator.next();
 
-            if (dateFrom.equals(reservationNext.getDateStart()) && dateTo.equals(reservationNext.getDateEnd()) && pointCharge == reservationNext.getIdPointCharge() )
+            if (dateFrom.equals(reservationNext.getDateStart()) && dateTo.equals(reservationNext.getDateEnd()) && idPointCharge == reservationNext.getIdPointCharge() )
             {
               reservationFoundedList.add(reservationNext);
             }
@@ -53,6 +53,29 @@ public class ReservationManager {
         }
 
         return reservationFoundedList;
+    }
+
+    public List<Reservation> GetAllReservationByDateClient(Date dateFrom,Date dateTo,int idUser){
+
+        Iterator<Reservation> iterator = this.reservationList.iterator();
+        List<Reservation> reservationFoundedList = new ArrayList<>();
+
+        while(iterator.hasNext()) {
+            Reservation reservationNext = iterator.next();
+
+            if (dateFrom.equals(reservationNext.getDateStart()) && dateTo.equals(reservationNext.getDateEnd())
+                    && idUser == reservationNext.getIdUser() )
+            {
+                reservationFoundedList.add(reservationNext);
+            }
+
+        }
+
+        return reservationFoundedList;
+    }
+
+    public void AcceptReservation(){
+        reservation.setAccepted(true);
     }
 
 }

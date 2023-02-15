@@ -23,7 +23,7 @@ public class TestReservationManager {
 
         Date dateEnd = objSDF.parse("20-08-1023");
 
-        Reservation reservation = new Reservation(12,11,dateStart,dateEnd);
+        Reservation reservation = new Reservation(12,11,dateStart,dateEnd,false);
 
         assertEquals(12,reservation.getIdUser());
 
@@ -41,9 +41,9 @@ public class TestReservationManager {
         Date dateStart = objSDF.parse("20-08-2023");
         Date dateEnd = objSDF.parse("21-08-2023");
 
-        reservationManager.reservationList.add(new Reservation(12,11,dateStart,dateEnd));
-        reservationManager.reservationList.add(new Reservation(13,14,objSDF.parse("22-08-2023"),objSDF.parse("23-08-2023")));
-        reservationManager.reservationList.add(new Reservation(13,14,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023")));
+        reservationManager.reservationList.add(new Reservation(12,11,dateStart,dateEnd,false));
+        reservationManager.reservationList.add(new Reservation(13,14,objSDF.parse("22-08-2023"),objSDF.parse("23-08-2023"),false));
+        reservationManager.reservationList.add(new Reservation(13,14,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"),false));
 
         reservationFoundedList =  reservationManager.GetAllReservationByDate(dateStart,dateEnd);
 
@@ -51,11 +51,9 @@ public class TestReservationManager {
        //check if some property is in the list of objects
 
         assertThat(reservationFoundedList, hasItems(
-                new Reservation(12,11,dateStart,dateEnd),
-                new Reservation(13,14,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"))
+                new Reservation(12,11,dateStart,dateEnd,false),
+                new Reservation(13,14,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"),false)
         ));
-        
-    
     }
 
 }
