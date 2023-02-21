@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>List reservations</title>
+</head>
+<body>
+
+
+<table class="w3-table-all w3-hoverable" >
+    <tr>
+        <td>User</td>
+        <td>Point Charge</td>
+        <td>Date Start</td>
+        <td>Date End</td>
+        <td>accepted</td>
+        <td>Delete</td>
+        <td>Update</td>
+        <td>Detail</td>
+
+    </tr>
+    <tr th:each="reservation:${reservations}">
+
+        <td th:text="${reservation.idUser}"></td>
+        <td th:text="${reservation.idPointCharge}"></td>
+        <td th:text="${reservation.dateStart}"></td>
+        <td th:text="${reservation.dateEnd}"></td>
+        <td th:text="${reservation.accepted}"></td>
+
+        <td> <a th:href ="@{deleteReservation(reserveIdFromView=${reservation.idUser})}"
+                class="w3-button w3-red">Delete this reservation</a> </td>
+
+        <td> <a th:href ="@{updateReservation(reserveIdFromView=${reservation.idUser})}"
+                class="w3-button w3-cyan">Update this reservation</a> </td>
+
+        <td> <a th:href ="@{detailReservation(reserveIdFromView=${reservation.idUser})}"
+                class="w3-button w3-black">Detail reservation</a> </td>
+
+    </tr>
+</table>
+
+<p>
+    <a th:href="@{/reservation/newReservation}" class="w3-button w3-blue">Add new reservation</a>
+</p>
+</body>
+</html>

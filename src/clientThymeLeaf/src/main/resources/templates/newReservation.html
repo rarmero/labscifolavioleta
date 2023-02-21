@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manage reservation</title>
+</head>
+<body>
+<div class="w3-card-4" style="width:50%;">
+  <header class="w3-container w3-light-grey">
+    <img src="/images/open-book.png" alt="open-reservation" class="w3-right w3-padding-16 w3-margin-right" style="width:40px">
+    <p>Manage Reservation</p>
+  </header>
+
+  <div class="w3-container">
+    <form action="insertReservation" >
+      <p>
+        <label for="idUser">User</label>
+        <input  type="text" name="idUser" class="w3-input" id="idUser"></p>
+      <p>
+        <label for="idPointCharge">Point Charge</label>
+        <input  type="text" name="idPointCharge" class="w3-input" id="idPointCharge"></p>
+      <p>
+        <label for="dateStart">date Start</label>
+        <input type="date" name="dateStart" class="w3-input" id="dateStart" ></p>
+      <p>
+        <label for="dateEnd">date End</label>
+        <input  type="date" name="dateEnd" class="w3-input" id="dateEnd" ></p>
+      <p>
+      <div class="w3-container w3-padding-16">
+        <input type="submit" value="Add new reserve" class="w3-button w3-padding-16 w3-light-grey w3-right w3-margin-right"/>
+      </div>
+    </form>
+  </div>
+
+  <footer class="w3-container w3-dark-grey">
+    <p>Reservation</p>
+  </footer>
+</div>
+
+<div >
+  <p><a th:href="@{/reservation/reservations}" class="w3-button w3-black">Back reserves</a></p>
+</div>
+</body>
+</html>
