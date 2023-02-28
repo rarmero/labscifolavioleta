@@ -1,26 +1,29 @@
 
 import com.mongodb.client.*;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Projections;
 import org.bson.BsonDocument;
 import org.bson.BsonInt64;
 import org.bson.Document;
 
 import com.mongodb.MongoException;
 import org.bson.conversions.Bson;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.Properties;
 
 
 public class RunCommand {
-    public static void main(String[] args) {
-        // Replace the uri string with your MongoDB deployment's connection string
-        String uri = "mongodb+srv://<user>:<password>@<serveraddress>/<database>";
 
-        try (MongoClient mongoClient = MongoClients.create(uri)) {
+    public static void main(String[] args) throws IOException {
 
-            MongoDatabase database = mongoClient.getDatabase("electrolinera");
+        final Properties myAppProperties = new Properties();
+        myAppProperties.load(new FileInputStream("src/main/resources/application.properties"));
 
-            System.out.println("connected to:" + database.getName());
+        try (MongoClient mongoClient = MongoClients.create(myAppProperties.getProperty("app.uri"))) {
 
+            MongoDatabase database = mongoClient.getDatabase(myAppProperties.getProperty("app.database"));
+
+            System.out.println("Connected to:" + database.getName());
 
             try {
                 Bson command = new BsonDocument("ping", new BsonInt64(1));
@@ -30,17 +33,17 @@ public class RunCommand {
                 System.out.println("showing collection reserve");
 
                 MongoCollection<Document> collection = database.getCollection("reserve");
-                collection.find().first();
 
-                Bson filter = Filters.and(Filters.eq("IdPointCharge",123));
-
-                collection.find(filter).forEach(doc -> System.out.println(doc.toJson()));
-
+                //Retrieving the documents
+                FindIterable<Document> iterDoc = collection.find();
+                Iterator it = iterDoc.iterator();
+                while (it.hasNext()) {
+                    System.out.println("********************************" + it.next());
+                }
 
             } catch (MongoException me) {
                 System.err.println("An error occurred while attempting to run a command: " + me);
             }
-
 
         }
     }
