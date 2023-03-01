@@ -6,10 +6,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>List reservations</title>
+    <title>Reservations list</title>
 </head>
 <body>
 
+<H1>Reservations list</H1>
 
 <table class="w3-table-all w3-hoverable" >
     <tr>
@@ -17,7 +18,7 @@
         <td>Point Charge</td>
         <td>Date Start</td>
         <td>Date End</td>
-        <td>accepted</td>
+        <td>Accepted</td>
         <td>Delete</td>
         <td>Update</td>
         <td>Detail</td>
@@ -32,13 +33,13 @@
         <td th:text="${reservation.accepted}"></td>
 
         <td> <a th:href ="@{deleteReservation(reserveIdFromView=${reservation.idUser})}"
-                class="w3-button w3-red">Delete this reservation</a> </td>
+                class="w3-button w3-red">Delete</a> </td>
 
         <td> <a th:href ="@{updateReservation(reserveIdFromView=${reservation.idUser})}"
-                class="w3-button w3-cyan">Update this reservation</a> </td>
+                class="w3-button w3-cyan">Update</a> </td>
 
         <td> <a th:href ="@{detailReservation(reserveIdFromView=${reservation.idUser})}"
-                class="w3-button w3-black">Detail reservation</a> </td>
+                class="w3-button w3-black">Detail</a> </td>
 
     </tr>
 </table>

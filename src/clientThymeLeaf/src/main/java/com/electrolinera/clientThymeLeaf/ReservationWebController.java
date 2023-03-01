@@ -17,7 +17,9 @@ public class ReservationWebController {
     ReservationService reservationService;
 
     @RequestMapping("/reservations")
-    public String reservations(Model containerToView,@RequestParam("datestart") String dateStart,@RequestParam("dateend") String dateEnd) {
+    public String reservations(Model containerToView,@RequestParam(name="datestart",defaultValue = "01/01/01") String dateStart,@RequestParam(value = "dateend",defaultValue="01/01/01") String dateEnd) {
+
+
 
         containerToView.addAttribute("reservations",
         reservationService.getAllReservations(dateStart,dateEnd)

@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +23,17 @@ public class ReservationService {
     public Iterable<Reservation> getAllReservations(String dateStart, String dateEnd) {
 
         StringBuilder url = new StringBuilder();
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-YYYY");
+        LocalDate localDate = LocalDate.now();
+
+        if(dateStart.contentEquals("01/01/01")){
+            dateStart =  LocalDate.now().toString();
+        }
+
+        if(dateEnd.contentEquals("01/01/01")){
+            dateEnd =  LocalDate.now().plusDays(1).toString();
+        }
 
            ResponseEntity<List<Reservation>> response = restTemplate.exchange(
                 "http://localhost:8081/reservations?datestart=" + dateStart + "&dateend=" + dateEnd,
