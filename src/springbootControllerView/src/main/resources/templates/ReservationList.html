@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reservations list</title>
+</head>
+<body>
+
+
+<p th:text="${calledby}"></p>
+
+<H1>Reservations list</H1>
+
+<table class="w3-table-all w3-hoverable" >
+  <tr>
+    <td>User</td>
+    <td>Point Charge</td>
+    <td>Date Start</td>
+    <td>Date End</td>
+    <td>Accepted</td>
+    <td>Delete</td>
+    <td>Update</td>
+    <td>Detail</td>
+
+  </tr>
+  <tr th:each="reservation:${reservations}">
+
+    <td th:text="${reservation.idUser}"></td>
+    <td th:text="${reservation.idPointCharge}"></td>
+    <td th:text="${reservation.dateStart}"></td>
+    <td th:text="${reservation.dateEnd}"></td>
+    <td th:text="${reservation.accepted}"></td>
+
+    <td> <a th:href ="@{deleteReservation(reserveIdFromView=${reservation.idUser})}"
+            class="w3-button w3-red">Delete</a> </td>
+
+    <td> <a th:href ="@{updateReservation(reserveIdFromView=${reservation.idUser})}"
+            class="w3-button w3-cyan">Update</a> </td>
+
+    <td> <a th:href ="@{detailReservation(reserveIdFromView=${reservation.idUser})}"
+            class="w3-button w3-black">Detail</a> </td>
+
+  </tr>
+</table>
+
+<p>
+  <a th:href="@{/reservation/reservationadd}" class="w3-button w3-blue">Add new reservation</a>
+</p>
+</body>
+</html>
