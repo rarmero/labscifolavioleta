@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReservationManager {
 
@@ -21,9 +22,9 @@ public class ReservationManager {
 
     public List<Reservation> GetAllReservationByDate(Date dateFrom,Date dateTo){
 
-        Iterator<Reservation> iterator = this.reservationList.iterator();
+       // Iterator<Reservation> iterator = this.reservationList.iterator();
         List<Reservation> reservationFoundedList = new ArrayList<>();
-
+/*
         while(iterator.hasNext()) {
             Reservation reservationNext = iterator.next();
 
@@ -33,15 +34,22 @@ public class ReservationManager {
             }
 
         }
+        */
+
+        reservationFoundedList =  reservationList.stream()
+                .filter(element->element.getDateStart().equals(dateFrom) && element.getDateEnd().equals(dateTo))
+                .collect(Collectors.toList());
+
+
 
         return reservationFoundedList;
     }
     
      public List<Reservation> GetAllReservationByDatePointCharge(Date dateFrom,Date dateTo,int idPointCharge){
 
-        Iterator<Reservation> iterator = this.reservationList.iterator();
+       // Iterator<Reservation> iterator = this.reservationList.iterator();
         List<Reservation> reservationFoundedList = new ArrayList<>();
-
+/*
         while(iterator.hasNext()) {
             Reservation reservationNext = iterator.next();
 
@@ -51,15 +59,22 @@ public class ReservationManager {
             }
 
         }
+        */
 
-        return reservationFoundedList;
+
+         reservationFoundedList =  reservationList.stream()
+                 .filter(element->element.getDateStart() == dateFrom && element.getDateEnd() == dateTo && element.getIdPointCharge() == idPointCharge )
+                 .collect(Collectors.toList());
+
+
+         return reservationFoundedList;
     }
 
     public List<Reservation> GetAllReservationByDateClient(Date dateFrom,Date dateTo,int idUser){
 
-        Iterator<Reservation> iterator = this.reservationList.iterator();
+  //      Iterator<Reservation> iterator = this.reservationList.iterator();
         List<Reservation> reservationFoundedList = new ArrayList<>();
-
+/*
         while(iterator.hasNext()) {
             Reservation reservationNext = iterator.next();
 
@@ -70,12 +85,51 @@ public class ReservationManager {
             }
 
         }
+        */
+
+        reservationFoundedList =  reservationList.stream()
+                .filter(element->element.getDateStart() == dateFrom && element.getDateEnd() == dateTo && element.getIdUser() == idUser)
+                .collect(Collectors.toList());
 
         return reservationFoundedList;
     }
 
     public void AcceptReservation(){
         reservation.setAccepted(true);
+    }
+
+
+    public Reservation getReservationById(long idUser){
+
+        Reservation reservationFilter =
+                reservationList.stream()
+                        .filter(element->element.getIdUser() == idUser)
+                        .findFirst()
+                        //.get()
+                        .orElse(null);;
+
+        return reservationFilter;
+    }
+
+    public int getIndex(long idUser){
+        Iterator<Reservation> iterator = reservationList.iterator();
+        int indexFound=-1;
+
+        int i = 0;
+        for (Iterator<Reservation> it = reservationList.iterator(); it.hasNext(); i++) {
+            Reservation reservationNext = it.next();
+            if (reservationNext.getIdUser() == idUser )
+            {
+                indexFound= i;
+            }
+        }
+
+        return indexFound;
+    }
+
+    public void saveReservation(int index,Reservation reservation){
+
+        reservationList.set(index,reservation);
     }
 
 }

@@ -15,3 +15,5 @@ public class Reservation {
    private Boolean accepted;
 
 }
+
+//TODO: compare and/or equal
