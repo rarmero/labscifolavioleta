@@ -24,27 +24,29 @@ public class TestReservationManager {
 
         Faker faker = new Faker();
 
-        reservationManagerGlobal.reservationList.add(
-                new Reservation (faker.idNumber().hashCode(), faker.idNumber().hashCode(),
-        faker.date().past(1, TimeUnit.DAYS),faker.date().past(1,TimeUnit.DAYS),Boolean.FALSE));
+        for (int i=0 ; i <= 100;i++) {
+            reservationManagerGlobal.reservationList.add(
+                    new Reservation(faker.idNumber().hashCode(), faker.idNumber().hashCode(),
+                            faker.date().past(1, TimeUnit.DAYS), faker.date().past(1, TimeUnit.DAYS), Boolean.FALSE));
 
-        reservationManagerGlobal.reservationList.add(
-                new Reservation (faker.idNumber().hashCode(), faker.idNumber().hashCode(),
-                        faker.date().past(1, TimeUnit.DAYS),faker.date().past(1,TimeUnit.DAYS),Boolean.FALSE));
-        reservationManagerGlobal.reservationList.add(
-                new Reservation (faker.idNumber().hashCode(), faker.idNumber().hashCode(),
-                        faker.date().past(1, TimeUnit.DAYS),faker.date().past(1,TimeUnit.DAYS),Boolean.FALSE));
-        reservationManagerGlobal.reservationList.add(
-                new Reservation (faker.idNumber().hashCode(), faker.idNumber().hashCode(),
-                        faker.date().past(1, TimeUnit.DAYS),faker.date().past(1,TimeUnit.DAYS),Boolean.FALSE));
-        reservationManagerGlobal.reservationList.add(
-                new Reservation (faker.idNumber().hashCode(), faker.idNumber().hashCode(),
-                        faker.date().past(1, TimeUnit.DAYS),faker.date().past(1,TimeUnit.DAYS),Boolean.FALSE));
+        }
 
+     //   reservationManagerGlobal.reservationList.forEach(System.out::println );
 
+    }
 
-        reservationManagerGlobal.reservationList.forEach(System.out::println );
+    public ReservationManager addData() throws ParseException {
 
+        ReservationManager reservationManager = new ReservationManager();
+
+        SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
+
+        reservationManager.reservationList.add(new Reservation(12,11,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"),false));
+        reservationManager.reservationList.add(new Reservation(12,11,objSDF.parse("10-08-2023"),objSDF.parse("11-08-2023"),false));
+        reservationManager.reservationList.add(new Reservation(13,14,objSDF.parse("22-08-2023"),objSDF.parse("23-08-2023"),false));
+        reservationManager.reservationList.add(new Reservation(13,14,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"),false));
+
+        return reservationManager;
     }
 
     @Test
@@ -65,16 +67,17 @@ public class TestReservationManager {
 
         ReservationManager reservationManager = new ReservationManager();
 
+        reservationManager= addData();
+
+        //reservationManager.reservationList.forEach(System.out::println );
+
         List<Reservation> reservationFoundedList = new ArrayList<>();
 
         SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
 
-        reservationManager.reservationList.add(new Reservation(12,11,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"),false));
-        reservationManager.reservationList.add(new Reservation(13,14,objSDF.parse("22-08-2023"),objSDF.parse("23-08-2023"),false));
-        reservationManager.reservationList.add(new Reservation(13,14,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"),false));
-
         reservationFoundedList =  reservationManager.GetAllReservationByDate(objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"));
 
+        reservationManager.reservationList.forEach(System.out::println );
 
        //check if some property is in the list of objects
 
@@ -84,6 +87,29 @@ public class TestReservationManager {
         ));
     }
 
+    @Test
+    public void GetAllReservationByDateClientTest() throws ParseException {
+        ReservationManager reservationManager = new ReservationManager();
+
+        reservationManager= addData();
+
+        //reservationManager.reservationList.forEach(System.out::println );
+
+        List<Reservation> reservationFoundedList = new ArrayList<>();
+
+        SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
+
+        reservationFoundedList =  reservationManager.GetAllReservationByDateClient(objSDF.parse("01-08-2023"),objSDF.parse("31-08-2023"),12);
+
+        reservationManager.reservationList.forEach(System.out::println );
+
+        //check if some property is in the list of objects
+
+        assertThat(reservationFoundedList, hasItems(
+                new Reservation(12,11,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"),false),
+                new Reservation(12,11,objSDF.parse("10-08-2023"),objSDF.parse("11-08-2023"),false)
+        ));
+    }
 
     @Test
     public void getReservationByIdTest() throws ParseException {
@@ -91,15 +117,10 @@ public class TestReservationManager {
         ReservationManager reservationManager = new ReservationManager();
         Reservation reservation = new Reservation();
 
-        SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy");
+        SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
 
-        reservation.setDateStart(objSDF.parse("20-08-2023"));
-        reservation.setDateStart(objSDF.parse("21-08-2023"));;
-        reservation.setAccepted(true);
-        reservation.setIdUser(1);
-        reservation.setIdPointCharge(1);
-
-        reservationManager.reservationList.add(reservation);
+        reservationManager.reservationList.add(
+                new Reservation(1,1,objSDF.parse("20-08-2023"),objSDF.parse("20-08-2023"),Boolean.TRUE));
 
         assertEquals(1,reservationManager.getReservationById(1).getIdUser());
     }
@@ -118,12 +139,16 @@ public class TestReservationManager {
         reservationManager.reservationList.add(new Reservation(2,1,
                 objSDF.parse("25-08-2023"),  objSDF.parse("26-08-2023"),false));
 
-        assertEquals(1,reservationManager.getIndex(2));
+        int index = reservationManager.reservationList.indexOf(
+                new Reservation(2,1,objSDF.parse("25-08-2023"),  objSDF.parse("26-08-2023"),false)
+        );
+
+        assertEquals(1,index);
     }
 
 
     @Test
-    public void saveReservationtest() throws ParseException {
+    public void saveReservationTest() throws ParseException {
 
         ReservationManager reservationManager = new ReservationManager();
 
@@ -131,29 +156,25 @@ public class TestReservationManager {
 
         SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
 
-        reservationManager.reservationList.add(new Reservation(1,1,
-                objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"),false));
+        reservationManager=addData();
 
-        reservationManager.reservationList.add(new Reservation(2,1,
-                objSDF.parse("25-08-2023"),objSDF.parse("26-08-2023"),false));
+        Reservation reservationToSave = reservationManager.getReservationById(12);
 
-        Reservation reservationToSave = reservationManager.getReservationById(1);
-
-        //reservationManager.reservationList.forEach(System.out::println );
+      //  reservationManager.reservationList.forEach(System.out::println );
 
         reservationToSave.setDateStart(objSDF.parse("30-08-2023"));
 
-        reservationManager.saveReservation(reservationManager.getIndex(reservationToSave.getIdUser()),reservationToSave);
+        reservationManager.saveReservation(reservationManager.reservationList.indexOf(reservationToSave),reservationToSave);
 
-        System.out.println(reservationManager.getIndex(reservationToSave.getIdUser()));
+       // System.out.println(reservationManager.reservationList.indexOf(reservationToSave));
 
         Reservation reservationToCheck = reservationManager.getReservationById(1);
 
-       // reservationManager.reservationList.forEach(System.out::println );
+        reservationManager.reservationList.forEach(System.out::println );
 
         assertEquals(objSDF.parse("30-08-2023"),
                 reservationManager.reservationList.get(
-                        reservationManager.getIndex(reservationToSave.getIdUser())
+                        reservationManager.reservationList.indexOf(reservationToSave)
                 ).getDateStart()
         ) ;
     }
@@ -164,33 +185,15 @@ public class TestReservationManager {
 
         Reservation reservation = new Reservation();
 
-        SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy");
-        Date dateStart = new Date();
-        Date dateEnd = new Date();
+        SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
 
-        dateStart = objSDF.parse("20-08-2023");
-        dateEnd = objSDF.parse("21-08-2023");
+        reservationManager= addData();
 
-        reservationManager.reservationList.add(new Reservation(1,1,dateStart,dateEnd,false));
-
-        dateStart = objSDF.parse("22-08-2023");
-        dateEnd = objSDF.parse("23-08-2023");
-
-        reservationManager.reservationList.add(new Reservation(2,1,dateStart,dateEnd,false));
-
-        dateStart = objSDF.parse("25-08-2023");
-        dateEnd = objSDF.parse("26-08-2023");
-
-        reservationManager.reservationList.add(new Reservation(3,2,dateStart,dateEnd,false));
-
-        dateStart = objSDF.parse("25-08-2023");
-        dateEnd = objSDF.parse("26-08-2023");
-
-        reservationManager.reservationList.add(new Reservation(4,3,dateStart,dateEnd,false));
+        reservationManager.reservationList.forEach(System.out::println );
 
         List<Reservation> reservationFoundedList = new ArrayList<>();
 
-        reservationFoundedList = reservationManager.GetAllReservationByDate(dateStart,dateEnd);
+        reservationFoundedList = reservationManager.GetAllReservationByDate(objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"));
 
         reservationFoundedList.forEach(System.out::println );
 

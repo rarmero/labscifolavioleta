@@ -35,18 +35,6 @@ public class ReservationManager {
 
        // Iterator<Reservation> iterator = this.reservationList.iterator();
         List<Reservation> reservationFoundedList = new ArrayList<>();
-/*
-        while(iterator.hasNext()) {
-            Reservation reservationNext = iterator.next();
-
-            if (dateFrom.equals(reservationNext.getDateStart()) && dateTo.equals(reservationNext.getDateEnd()) && idPointCharge == reservationNext.getIdPointCharge() )
-            {
-              reservationFoundedList.add(reservationNext);
-            }
-
-        }
-        */
-
 
          reservationFoundedList =  reservationList.stream()
                  .filter(element->element.getDateStart() == dateFrom && element.getDateEnd() == dateTo && element.getIdPointCharge() == idPointCharge )
@@ -57,21 +45,9 @@ public class ReservationManager {
     }
 
     public List<Reservation> GetAllReservationByDateClient(Date dateFrom,Date dateTo,int idUser){
+//TODO: condition between from
 
-  //      Iterator<Reservation> iterator = this.reservationList.iterator();
         List<Reservation> reservationFoundedList = new ArrayList<>();
-/*
-        while(iterator.hasNext()) {
-            Reservation reservationNext = iterator.next();
-
-            if (dateFrom.equals(reservationNext.getDateStart()) && dateTo.equals(reservationNext.getDateEnd())
-                    && idUser == reservationNext.getIdUser() )
-            {
-                reservationFoundedList.add(reservationNext);
-            }
-
-        }
-        */
 
         reservationFoundedList =  reservationList.stream()
                 .filter(element->element.getDateStart() == dateFrom && element.getDateEnd() == dateTo && element.getIdUser() == idUser)
@@ -97,20 +73,9 @@ public class ReservationManager {
         return reservationFilter;
     }
 
-    public int getIndex(long idUser){
-        Iterator<Reservation> iterator = reservationList.iterator();
-        int indexFound=-1;
+    public int getIndex(Reservation reservation){
 
-        int i = 0;
-        for (Iterator<Reservation> it = reservationList.iterator(); it.hasNext(); i++) {
-            Reservation reservationNext = it.next();
-            if (reservationNext.getIdUser() == idUser )
-            {
-                indexFound= i;
-            }
-        }
-
-        return indexFound;
+        return reservationList.indexOf(reservation);
     }
 
     public void saveReservation(int index,Reservation reservation){
