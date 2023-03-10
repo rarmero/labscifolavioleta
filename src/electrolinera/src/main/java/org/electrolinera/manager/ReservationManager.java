@@ -22,25 +22,11 @@ public class ReservationManager {
 
     public List<Reservation> GetAllReservationByDate(Date dateFrom,Date dateTo){
 
-       // Iterator<Reservation> iterator = this.reservationList.iterator();
         List<Reservation> reservationFoundedList = new ArrayList<>();
-/*
-        while(iterator.hasNext()) {
-            Reservation reservationNext = iterator.next();
-
-            if (dateFrom.equals(reservationNext.getDateStart()) && dateTo.equals(reservationNext.getDateEnd()) )
-            {
-              reservationFoundedList.add(reservationNext);
-            }
-
-        }
-        */
 
         reservationFoundedList =  reservationList.stream()
                 .filter(element->element.getDateStart().equals(dateFrom) && element.getDateEnd().equals(dateTo))
                 .collect(Collectors.toList());
-
-
 
         return reservationFoundedList;
     }
