@@ -19,7 +19,7 @@ public class TestReservationManager {
 
 
     ReservationManager reservationManagerGlobal = new ReservationManager();
-@Test
+
     public void initDataFaker(){
 
         Faker faker = new Faker();
@@ -63,7 +63,7 @@ public class TestReservationManager {
     }
 
     @Test
-    public void  TestGetAllReservationByDate() throws ParseException {
+    public void  GetAllReservationByDateTest2() throws ParseException {
 
         ReservationManager reservationManager = new ReservationManager();
 
@@ -75,7 +75,7 @@ public class TestReservationManager {
 
         SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
 
-        reservationFoundedList =  reservationManager.GetAllReservationByDate(objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"));
+        reservationFoundedList =  reservationManager.GetAllReservationByDate(objSDF.parse("19-08-2023"),objSDF.parse("22-08-2023"));
 
         reservationManager.reservationList.forEach(System.out::println );
 
@@ -189,13 +189,15 @@ public class TestReservationManager {
 
         reservationManager= addData();
 
-        reservationManager.reservationList.forEach(System.out::println );
+        //reservationManager.reservationList.forEach(System.out::println );
+        //System.out.println("*****");
 
         List<Reservation> reservationFoundedList = new ArrayList<>();
 
-        reservationFoundedList = reservationManager.GetAllReservationByDate(objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"));
+        reservationFoundedList = reservationManager.GetAllReservationByDate(objSDF.parse("19-08-2023"),objSDF.parse("25-08-2023"));
 
         reservationFoundedList.forEach(System.out::println );
 
     }
+
 }

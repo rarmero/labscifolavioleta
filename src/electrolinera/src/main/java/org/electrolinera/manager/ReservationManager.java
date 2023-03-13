@@ -25,7 +25,7 @@ public class ReservationManager {
         List<Reservation> reservationFoundedList = new ArrayList<>();
 
         reservationFoundedList =  reservationList.stream()
-                .filter(element->element.getDateStart().equals(dateFrom) && element.getDateEnd().equals(dateTo))
+                .filter(element->element.getDateStart().after(dateFrom) && element.getDateEnd().before(dateTo))
                 .collect(Collectors.toList());
 
         return reservationFoundedList;
@@ -33,11 +33,10 @@ public class ReservationManager {
     
      public List<Reservation> GetAllReservationByDatePointCharge(Date dateFrom,Date dateTo,int idPointCharge){
 
-       // Iterator<Reservation> iterator = this.reservationList.iterator();
-        List<Reservation> reservationFoundedList = new ArrayList<>();
+         List<Reservation> reservationFoundedList = new ArrayList<>();
 
          reservationFoundedList =  reservationList.stream()
-                 .filter(element->element.getDateStart() == dateFrom && element.getDateEnd() == dateTo && element.getIdPointCharge() == idPointCharge )
+                 .filter(element->element.getDateStart().after(dateFrom) && element.getDateEnd().before(dateTo) && element.getIdPointCharge() == idPointCharge )
                  .collect(Collectors.toList());
 
 
@@ -50,7 +49,7 @@ public class ReservationManager {
         List<Reservation> reservationFoundedList = new ArrayList<>();
 
         reservationFoundedList =  reservationList.stream()
-                .filter(element->element.getDateStart() == dateFrom && element.getDateEnd() == dateTo && element.getIdUser() == idUser)
+                .filter(element->element.getDateStart().after(dateFrom) && element.getDateEnd().before(dateTo) && element.getIdUser() == idUser)
                 .collect(Collectors.toList());
 
         return reservationFoundedList;
