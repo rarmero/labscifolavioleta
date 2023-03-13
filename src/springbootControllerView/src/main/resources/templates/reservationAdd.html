@@ -24,15 +24,15 @@
 
     <div class="form-group">
     <label>Date Start:</label>
-        <input type="text" class="form-control" th:field="*{dateStart}" />
+        <input type="date" class="form-control" th:field="*{dateStart}" />
     </div>
 
     <div class="form-group">
-    <p>Date End: <input type="text" class="form-control" th:field="*{dateEnd}" /></p>
+    <p>Date End: <input type="date" class="form-control" th:field="*{dateEnd}" /></p>
     </div>
 
     <div>
-    <p>Accepted: <input type="text" class="form-control" th:field="*{accepted}" /></p>
+    <p>Accepted: <input type="checkbox" class="form-control" th:field="*{accepted}" /></p>
     </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -28,7 +28,7 @@
     <td>Detail</td>
 
   </tr>
-  <tr th:each="reservation:${reservations}">
+  <tr th:each="reservation,state:${reservations}">
 
     <td th:text="${reservation.idUser}"></td>
     <td th:text="${reservation.idPointCharge}"></td>
@@ -36,20 +36,20 @@
     <td th:text="${reservation.dateEnd}"></td>
     <td th:text="${reservation.accepted}"></td>
 
-    <td> <a th:href ="@{deleteReservation(reserveIdFromView=${reservation.idUser})}"
+    <td> <a th:href ="@{reservationDelete(reserveIdFromView=${state.index})}"
             class="w3-button w3-red">Delete</a> </td>
 
-    <td> <a th:href ="@{updateReservation(reserveIdFromView=${reservation.idUser})}"
+    <td> <a th:href ="@{ReservationUpdate(reserveIdFromView=${state.index})}"
             class="w3-button w3-cyan">Update</a> </td>
 
-    <td> <a th:href ="@{detailReservation(reserveIdFromView=${reservation.idUser})}"
+    <td> <a th:href ="@{ReservationDetail(reserveIdFromView=${state.index})}"
             class="w3-button w3-black">Detail</a> </td>
 
   </tr>
 </table>
 
 <p>
-  <a th:href="@{/reservation/reservationadd}" class="w3-button w3-blue">Add new reservation</a>
+  <a th:href="@{/reservationnew}" class="w3-button w3-blue">Add new reservation</a>
 </p>
 </body>
 </html>

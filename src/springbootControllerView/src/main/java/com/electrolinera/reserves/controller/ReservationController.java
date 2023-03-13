@@ -1,10 +1,13 @@
 package com.electrolinera.reserves.controller;
 
+import com.electrolinera.reserves.service.ReservationService;
 import org.electrolinera.model.Reservation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -15,6 +18,9 @@ import java.util.List;
 @Controller
 public class ReservationController {
 
+    @Autowired
+    ReservationService reservationService;
+
     @GetMapping("/reservationnew")
     public String greetingForm(Model model) {
         model.addAttribute("reservation", new Reservation());
@@ -23,26 +29,18 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/reservationAdd",method = RequestMethod.POST)
-    public String reservationsubmit( @ModelAttribute Reservation reservation, Model model){
+    public String reservationsubmit( @ModelAttribute Reservation reservation, Model model) throws ParseException {
 
-        reservation.setAccepted(true);
+      /*  model.addAttribute("reservation", reservation);
 
-        SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy");
-        Date dateStart = new Date();
-
-        try {
-            dateStart = objSDF.parse("20-08-2023");
-        }
-        catch(Exception e){
-
-        }
-
-        reservation.setDateStart(dateStart);
-
-        model.addAttribute("reservation", reservation);
         model.addAttribute("calledby","post");
 
         return "reservationAdd";
+      */
+
+      reservationService.reservationAdd(reservation);
+        return "redirect:reservation";
+
     }
 
 
@@ -68,12 +66,15 @@ public class ReservationController {
        return "reservationList";
     }
 
-    @RequestMapping(value = "/reservation",method = RequestMethod.POST)
-    public String reservationSubmit( @ModelAttribute Reservation reservation, Model model){
+    @RequestMapping(value = "/reservation",method = RequestMethod.GET)
+    public String reservation( @ModelAttribute Reservation reservation, Model model){
 
+        /*
         List<Reservation> reservationList =new ArrayList<Reservation>();
         reservationList.add(reservation);
         model.addAttribute("reservations",  reservationList);
+*/
+        model.addAttribute("reservations",  reservationService.getAllReservations());
 
         return "reservationList";
     }
