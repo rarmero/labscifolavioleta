@@ -44,7 +44,6 @@ public class ReservationManager {
     }
 
     public List<Reservation> GetAllReservationByDateClient(Date dateFrom,Date dateTo,int idUser){
-//TODO: condition between from
 
         List<Reservation> reservationFoundedList = new ArrayList<>();
 
