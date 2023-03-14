@@ -71,13 +71,24 @@ public class ReservationManager {
         return reservationFilter;
     }
 
-    public int getIndex(Reservation reservation){
+    public Reservation getReservation(int index){
 
+        return reservationList.get(index);
+    }
+
+    public int getIndex(Reservation reservation){
         return reservationList.indexOf(reservation);
     }
 
     public void saveReservation(int index,Reservation reservation){
+        reservationList.set(index,reservation);
+    }
 
+    public void deleteReservation(Reservation reservation){
+        reservationList.remove(reservation);
+    }
+
+    public void  updateReservation(int index,Reservation reservation){
         reservationList.set(index,reservation);
     }
 

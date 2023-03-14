@@ -200,4 +200,64 @@ public class TestReservationManager {
 
     }
 
+    @Test
+    public void deleteReservationTest() throws ParseException {
+
+        ReservationManager reservationManager = new ReservationManager();
+
+        reservationManager= addData();
+
+        reservationManager.reservationList.forEach(System.out::println );
+        System.out.println("**********************");
+
+        SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
+
+        Reservation reservation = new Reservation(
+                12,11,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"),Boolean.FALSE);
+
+
+        reservationManager.deleteReservation(reservation);
+
+        reservationManager.reservationList.forEach(System.out::println );
+
+    }
+
+    @Test
+    public void updateReservationTest() throws ParseException {
+        ReservationManager reservationManager = new ReservationManager();
+
+        reservationManager= addData();
+
+        Reservation reservation = reservationManager.getReservation(0);
+
+        SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
+
+        reservation.setDateStart(objSDF.parse("20-10-2023"));
+        reservation.setDateEnd(objSDF.parse("21-10-2023"));
+
+        reservationManager.updateReservation(0,reservation);
+
+        assertEquals(reservation,
+                new Reservation(12,11,objSDF.parse("20-10-2023"),objSDF.parse("21-10-2023"),false)
+        );
+    }
+
+
+    @Test
+    public void getReservationTest() throws ParseException {
+      ReservationManager reservationManager = new ReservationManager();
+
+        reservationManager= addData();
+       // reservationManager.reservationList.forEach(System.out::println );
+
+       // System.out.println("**********************");
+        Reservation reservation = reservationManager.getReservation(0);
+
+        SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
+
+        assertEquals(reservation,
+                new Reservation(12,11,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"),false)
+        );
+    }
+
 }
