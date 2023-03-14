@@ -21,10 +21,15 @@ public class ReservationServiceImpl implements ReservationService{
 
     public  List<Reservation> getAllReservations(){
 
-        return  getAllReservations();
+        return  reservationRepository.getAllReservations();
+    }
+
+    public Reservation getReservationsByUser(int idUser){
+        return reservationRepository.getReservationsByidUser(idUser);
     }
 
     public void reservationDelete(Reservation reservation){
+
         reservationRepository.reservationDelete(reservation);
     }
 

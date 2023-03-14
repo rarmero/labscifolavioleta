@@ -50,14 +50,18 @@ public class TestReservationManager {
     }
 
     @Test
-    public void TestAddReservation() throws ParseException {
+    public void AddReservationTest() throws ParseException {
 
         SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
 
         Reservation reservation = new Reservation(12,11,
                 objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"),false);
 
-        assertEquals(reservation,
+        ReservationManager reservationManager = new ReservationManager();
+
+        reservationManager.addReservation(reservation);
+
+        assertEquals(reservationManager.getReservation(0),
                 new Reservation(12,11,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"),false));
 
     }

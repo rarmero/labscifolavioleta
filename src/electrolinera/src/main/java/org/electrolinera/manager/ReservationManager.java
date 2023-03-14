@@ -13,11 +13,8 @@ public class ReservationManager {
     public Reservation reservation = new Reservation();
     public List<Reservation> reservationList = new ArrayList<>();
 
-    public void AddReservation( int idUser, int idPointCharge,  Date dateStart,  Date dateEnd){
-        reservation.setIdUser(idUser);
-        reservation.setIdPointCharge(idPointCharge);
-        reservation.setDateStart(dateStart);
-        reservation.setDateEnd(dateEnd);
+    public void addReservation( Reservation reservation){
+        reservationList.add(reservation);
     }
 
     public List<Reservation> GetAllReservationByDate(Date dateFrom,Date dateTo){

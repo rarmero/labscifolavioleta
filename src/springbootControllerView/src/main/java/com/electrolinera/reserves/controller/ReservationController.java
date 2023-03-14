@@ -1,6 +1,7 @@
 package com.electrolinera.reserves.controller;
 
 import com.electrolinera.reserves.service.ReservationService;
+import com.electrolinera.reserves.service.ReservationServiceImpl;
 import org.electrolinera.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import java.util.List;
 public class ReservationController {
 
     @Autowired
-    ReservationService reservationService;
+    ReservationServiceImpl reservationService;
 
     @GetMapping("/reservationnew")
     public String greetingForm(Model model) {
@@ -43,11 +44,27 @@ public class ReservationController {
 
     }
 
+    @RequestMapping(value ="/reservationUpdate")
+    public String reservationUpdate(@RequestParam("idFromView") int  id ,
+                                    Model model) throws ParseException {
+
+       model.addAttribute("reservation",reservationService.getReservationsByUser(id));
+
+        return "reservationUpdate";
+    }
+
 
     @GetMapping("/reservationFilterUser")
     public String reservationFormUser(Model model) {
         model.addAttribute("reservation", new Reservation());
         return "reservationFilterbyUser";
+}
+
+@PostMapping("/reservationFilterUserPost")
+public  String reservationByUserId ( @ModelAttribute Reservation reservation, Model model){
+
+    model.addAttribute("reservations", reservationService.getReservationsByUser(reservation.getIdUser()));
+    return "reservationList";
 }
 
     @GetMapping("/reservationFilterDate")
