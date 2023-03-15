@@ -24,13 +24,20 @@ public class ReservationServiceImpl implements ReservationService{
         return  reservationRepository.getAllReservations();
     }
 
-    public Reservation getReservationsByUser(int idUser){
-        return reservationRepository.getReservationsByidUser(idUser);
+    public Reservation getReservationsByIdUser(int idUser){
+        return reservationRepository.getReservationsByIdUser(idUser);
+    }
+    public Reservation getReservationById(int id){
+        return reservationRepository.getReservationById(id);
     }
 
     public void reservationDelete(Reservation reservation){
 
         reservationRepository.reservationDelete(reservation);
+    }
+
+    public void reservationDeleteById(int reservationId){
+        reservationRepository.reservationDeleteById(reservationId);
     }
 
     public void reservationUpdate(int index,Reservation reservation)

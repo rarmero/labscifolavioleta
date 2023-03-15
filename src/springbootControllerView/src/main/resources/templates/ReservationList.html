@@ -18,6 +18,7 @@
 
 <table class="w3-table-all w3-hoverable" >
   <tr>
+    <td>Reservation<td>
     <td>User</td>
     <td>Point Charge</td>
     <td>Date Start</td>
@@ -30,6 +31,7 @@
   </tr>
   <tr th:each="reservation,state:${reservations}">
 
+    <td th:text="${state.index}"></td>
     <td th:text="${reservation.idUser}"></td>
     <td th:text="${reservation.idPointCharge}"></td>
     <td th:text="${reservation.dateStart}"></td>
@@ -39,10 +41,10 @@
     <td> <a th:href ="@{reservationDelete(reserveIdFromView=${state.index})}"
             class="w3-button w3-red">Delete</a> </td>
 
-    <td> <a th:href ="@{ReservationUpdate(reserveIdFromView=${state.index})}"
+    <td> <a th:href ="@{reservationUpdate(reserveIdFromView=${state.index})}"
             class="w3-button w3-cyan">Update</a> </td>
 
-    <td> <a th:href ="@{ReservationDetail(reserveIdFromView=${state.index})}"
+    <td> <a th:href ="@{reservationDetail(reserveIdFromView=${state.index})}"
             class="w3-button w3-black">Detail</a> </td>
 
   </tr>

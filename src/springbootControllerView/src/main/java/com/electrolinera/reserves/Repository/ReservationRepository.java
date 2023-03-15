@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public class ReservationRepository {
 
-
+//TODO: see to change the name
     private ReservationManager reservationManager= new ReservationManager();
 
     public void add(Reservation reservation){
@@ -24,13 +24,16 @@ public class ReservationRepository {
       return  reservationManager.reservationList;
     }
 
-    public Reservation getReservationsByidUser(long idUser){
+    public Reservation getReservationsByIdUser(long idUser){
         return reservationManager.getReservationById(idUser);
     }
 
     public void reservationDelete(Reservation reservation){
         reservationManager.deleteReservation(reservation);
+    }
 
+    public void reservationDeleteById(int idReservation){
+        reservationManager.deleteReservationById(idReservation);
     }
 
     public void reservationUpdate(int index,Reservation reservation){
@@ -39,5 +42,8 @@ public class ReservationRepository {
 
     public Reservation reservationDetail(int index){
       return  reservationManager.getReservation(index);
+    }
+    public Reservation getReservationById(int index){
+        return  reservationManager.getReservation(index);
     }
 }

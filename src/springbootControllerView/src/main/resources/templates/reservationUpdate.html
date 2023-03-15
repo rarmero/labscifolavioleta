@@ -9,8 +9,12 @@
 
 <p th:text="${calledby}"></p>
 
+<p th:text="${message}"> </p>
+
 <h1>Form</h1>
-<form action="#" th:action="@{/reservationUpdate}" th:object="${reservation}" method="post">
+<form th:action="@{reservationUpdate/{reserveIdFromView}(reserveIdFromView=${reserveIdFromView})}"
+      th:object="${reservation}"
+      method="post">
 
   <div class="form-group">
     <label>User:</label>
