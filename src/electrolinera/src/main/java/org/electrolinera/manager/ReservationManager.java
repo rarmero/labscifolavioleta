@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class ReservationManager {
 
-    public Reservation reservation = new Reservation();
+    private Reservation reservation = new Reservation();
     public List<Reservation> reservationList = new ArrayList<>();
 
     public void addReservation( Reservation reservation){
@@ -83,6 +83,11 @@ public class ReservationManager {
 
     public void deleteReservation(Reservation reservation){
         reservationList.remove(reservation);
+    }
+
+    public void deleteReservationById(int idReservation){
+
+        reservationList.remove(idReservation);
     }
 
     public void  updateReservation(int index,Reservation reservation){

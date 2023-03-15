@@ -227,6 +227,29 @@ public class TestReservationManager {
     }
 
     @Test
+    public void deleteReservationByIdTest() throws ParseException {
+        ReservationManager reservationManager = new ReservationManager();
+
+        reservationManager= addData();
+
+        reservationManager.reservationList.forEach(System.out::println );
+        System.out.println("**********************");
+
+        SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
+
+        Reservation reservation = new Reservation(
+                12,11,objSDF.parse("20-08-2023"),objSDF.parse("21-08-2023"),Boolean.FALSE);
+
+
+        reservationManager.addReservation(reservation);
+
+        reservationManager.deleteReservationById(reservationManager.getIndex(reservation));
+
+        reservationManager.reservationList.forEach(System.out::println );
+
+    }
+
+    @Test
     public void updateReservationTest() throws ParseException {
         ReservationManager reservationManager = new ReservationManager();
 
