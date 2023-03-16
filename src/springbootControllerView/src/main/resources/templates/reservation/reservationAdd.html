@@ -7,10 +7,9 @@
 </head>
 <body>
 
-<p th:text="${calledby}"></p>
 
 <h1>Form</h1>
-<form action="#" th:action="@{/reservationAdd}" th:object="${reservation}" method="post">
+<form action="#" th:action="@{/reservation/reservationAdd}" th:object="${reservation}" method="post">
 
     <div class="form-group">
     <label>User:</label>

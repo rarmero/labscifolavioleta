@@ -17,34 +17,28 @@ import java.util.List;
 
 
 @Controller
+
 public class ReservationController {
 
     @Autowired
     ReservationServiceImpl reservationService;
 
-    @GetMapping("/reservationnew")
+    @GetMapping("/reservation/reservationnew")
     public String greetingForm(Model model) {
         model.addAttribute("reservation", new Reservation());
-        model.addAttribute("calledby","get");
-        return "reservationAdd";
+       // model.addAttribute("calledby","get");
+        return "reservation/reservationAdd";
     }
 
-    @RequestMapping(value = "/reservationAdd",method = RequestMethod.POST)
+    @RequestMapping(value = "/reservation/reservationAdd",method = RequestMethod.POST)
     public String reservationsubmit( @ModelAttribute Reservation reservation, Model model) throws ParseException {
 
-      /*  model.addAttribute("reservation", reservation);
-
-        model.addAttribute("calledby","post");
-
-        return "reservationAdd";
-      */
-
-      reservationService.reservationAdd(reservation);
+        reservationService.reservationAdd(reservation);
         return "redirect:reservation";
 
     }
 
-    @RequestMapping(value ="/reservationUpdate")
+    @RequestMapping(value ="/reservation/reservationUpdate")
     public String reservationUpdate(@RequestParam(name="reserveIdFromView") Integer id,
                                     Model model){
 
@@ -54,72 +48,72 @@ public class ReservationController {
         if (reservationFound != null){
             model.addAttribute("reserveIdFromView",id);
             model.addAttribute("reservation", reservationFound);
-            model.addAttribute("message", "User  found");}
+             model.addAttribute("message", "User  found");}
         else
             model.addAttribute("message", "User not found");
 
 
-        return "reservationUpdate";
+        return "reservation/reservationUpdate";
     }
 
-    @PostMapping(value ="/reservationUpdate/{reserveIdFromView}")
-     public String reservationUpdatePost(@PathVariable("reserveIdFromView") Integer id,Reservation reservation) {
+    @PostMapping(value ="/reservation/reservationUpdate/{reserveIdFromView}")
+    public String reservationUpdateSubmit(@PathVariable("reserveIdFromView") Integer id,Reservation reservation) {
 
        reservationService.reservationUpdate(id,reservation);
 
-        return "reservation";
+        return "redirect:/reservationList";
     }
 
-    @GetMapping("/reservationFilterUser")
+    @GetMapping("/reservation/reservationFilterUser")
     public String reservationFormUser(Model model) {
         model.addAttribute("reservation", new Reservation());
-        return "reservationFilterbyUser";
+        return "reservation/reservationFilterbyUser";
 }
 
-    @PostMapping("/reservationFilterUserPost")
+    @PostMapping("/reservation/reservationFilterUserPost")
     public  String reservationByUserId ( @ModelAttribute Reservation reservation, Model model){
 
     model.addAttribute("reservations", reservationService.getReservationsByIdUser(reservation.getIdUser()));
-    return "ReservationList";
+    return "reservation/reservationList";
 }
 
-    @GetMapping("/reservationFilterDate")
+    @GetMapping("/reservation/reservationFilterDate")
     public String reservationFormDate(Model model) {
         model.addAttribute("reservation", new Reservation());
-        return "reservationFilterbyDate";
+        return "reservation/reservationFilterbyDate";
     }
 
-    @PostMapping("/reservationPost")
+    @PostMapping("/reservation/reservationPost")
     public String reservationPost( @ModelAttribute Reservation reservation, Model model) {
 
        List<Reservation> reservationList =new ArrayList<Reservation>();
        reservationList.add(reservation);
        model.addAttribute("reservations",  reservationList);
 
-       return "ReservationList";
+       return "reservation/reservationList";
     }
 
-    @RequestMapping(value = "/reservation",method = RequestMethod.GET)
+    @RequestMapping(value = "/reservation/reservation",method = RequestMethod.GET)
     public String reservation( @ModelAttribute Reservation reservation, Model model) {
 
         model.addAttribute("reservations",  reservationService.getAllReservations());
 
-        return "ReservationList";
+        return "reservation/reservationList";
     }
 
-    @RequestMapping("/reservationDelete")
+    @RequestMapping("/reservation/reservationDelete")
     private String reservationDelete(@RequestParam("reserveIdFromView") Integer idReserve){
         reservationService.reservationDeleteById(idReserve);
 
-        return "ReservationList";
+        return "reservation/reservationList";
     }
 
-    @RequestMapping("/reservationDetail")
+    @RequestMapping("/reservation/reservationDetail")
     public String reservationDetail(@RequestParam("reserveIdFromView") int reservationId,Model model){
         model.addAttribute("reserve",reservationService.reservationDetail(reservationId));
 
 
-        return "reservationDetail";
+        return "reservation/reservationDetail";
     }
 
 
