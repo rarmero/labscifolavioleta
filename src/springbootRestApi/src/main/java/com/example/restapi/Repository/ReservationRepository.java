@@ -6,7 +6,7 @@ import org.electrolinera.manager.ReservationManager;
 import org.electrolinera.model.Reservation;
 
 import java.util.List;
-
+import java.util.Optional;
 
 @Repository
 public class ReservationRepository {
@@ -20,7 +20,7 @@ public class ReservationRepository {
         return  reservationManager.reservationList;
     }
 
-    public Reservation getReservationsByIdUser(long idUser){
+    public  Reservation  getReservationsByIdUser(long idUser){
         return reservationManager.getReservationById(idUser);
     }
 

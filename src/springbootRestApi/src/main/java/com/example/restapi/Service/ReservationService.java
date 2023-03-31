@@ -3,6 +3,7 @@ package com.example.restapi.Service;
 import org.electrolinera.model.Reservation;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ReservationService {
     void reservationAdd(Reservation reservation);
