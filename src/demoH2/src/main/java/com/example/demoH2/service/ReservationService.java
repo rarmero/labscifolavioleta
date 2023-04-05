@@ -10,9 +10,9 @@ import java.util.List;
 public interface ReservationService {
     void reservationAdd(Reservation reservation);
     List<Reservation> getAllReservations() ;
-    void reservationDelete(Reservation reservation);
-    void reservationDeleteById(Integer reservationId);
-    void reservationUpdate(Integer idReservation,Reservation reservation);
+    void reservationDelete(Integer idReservation);
+    void reservationDeleteByIdUser(Integer idUser);
+    Reservation reservationUpdate(Integer idReservation,Reservation reservation);
     Reservation reservationDetail(Integer idReservation);
     Reservation getReservationById(Integer idReservation);
     Reservation getReservationsByIdUser(Integer idUser);

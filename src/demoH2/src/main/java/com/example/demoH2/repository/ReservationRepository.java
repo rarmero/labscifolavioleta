@@ -7,7 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 public interface ReservationRepository extends CrudRepository<Reservation, Integer> {
-    Optional<Reservation> addReservation(Reservation reservation);
-    Optional<Reservation> deleteReservationByIdUser(Integer idUser);
-Optional<Reservation> reservationDetail(Integer idReservation);
+
 }

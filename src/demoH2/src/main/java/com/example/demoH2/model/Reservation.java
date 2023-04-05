@@ -1,5 +1,8 @@
 package com.example.demoH2.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.util.Date;
 import lombok.*;
 
@@ -7,7 +10,10 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name="reservation")
+@Table(name="reservation")
 public class Reservation {
+    @Id
     private Integer idReservation;
     private Integer idUser;
     private Integer idPointCharge;

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("api")
 public class ReservationController {
@@ -35,5 +37,23 @@ public class ReservationController {
         return reservation.toString();
     }
 
+    @PutMapping("/updateReservation/{id}")
+    public String updateUser (@PathVariable Integer id, @RequestBody Reservation dataReservation) {
+
+
+        Reservation reservationUpdated = reservationService.reservationUpdate(id,dataReservation);
+
+        if (reservationUpdated != null)
+            return "Reservation updated by Service properly.\nUser updated: " + reservationUpdated.toString();
+        else return "error 418";
+
+    }
+
+    @DeleteMapping("/deleteUser")
+    public void deleteUser (@RequestBody Reservation dataReservation){
+
+        reservationService.reservationDelete(dataReservation);
+
+    }
 
 }
