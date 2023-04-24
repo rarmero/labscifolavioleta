@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +58,11 @@ public class ReservationController {
 }
 
     @GetMapping("/reservationsByIntervalDate")
-    public ResponseEntity<List<Reservation>> getAllReservationsbyInvertalDate(@RequestParam(required = true) Date dateFrom, Date dateEnd) {
+    public ResponseEntity<List<Reservation>> getAllReservationsbyInvertalDate(@RequestParam(required = true)
+                                                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                                                  Date dateFrom,
+                                                                              @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                                              Date dateEnd) {
        // TODO: correct error with date
         try {
             List<Reservation> reservations = new ArrayList<>();

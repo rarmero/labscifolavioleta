@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ReservationRepository extends MongoRepository<Reservation,String>{
   List<Reservation> findByIdUser(Integer idUser);
   List<Reservation> findByAccepted(boolean accepted);
-  @Query("{dateFrom:'?0',dateTo:'?0'}")
+  @Query("{'dateStart' :{'$gte':?0, '$lt':?1}}")
   List<Reservation> getAllReservationsByDate(Date dateFrom,Date dateTo);
 
 }
