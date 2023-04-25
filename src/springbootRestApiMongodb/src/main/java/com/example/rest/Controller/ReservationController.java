@@ -32,8 +32,8 @@ public class ReservationController {
         
   @Autowired
   private ReservationServiceImpl reservationService;
-  
-  
+
+  @CrossOrigin
   @GetMapping("/reservations")
   public ResponseEntity<List<Reservation>> getAllReservations(@RequestParam(required = false) Integer idUser) {
     try {
