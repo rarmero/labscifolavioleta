@@ -25,6 +25,7 @@ const marks = [
 function reducer(state, action) {
 
   switch (action.type) {
+
     case "change_temperature": {
       return {
         valueTemperature: action.ValueTemperature  
@@ -36,7 +37,8 @@ function reducer(state, action) {
   }
 }
 
-const initialState = { valueTemperature: "20" };
+const initialState = { 
+  valueTemperature: "20" };
 
 function valuetext(value) {
   return `${value}°C`;
@@ -45,7 +47,7 @@ function valuetext(value) {
 function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  
+
   function handleChangeTemperature(e)
   {
     dispatch({
@@ -57,7 +59,6 @@ function App() {
 
   return (
     <>
-
     <Box sx={{ width: 300 }}>
       <Slider
         aria-label="Custom marks"
@@ -66,8 +67,7 @@ function App() {
         step={10}
         valueLabelDisplay="auto"
         marks={marks}
-        onChange={handleChangeTemperature}
-        onChangeCommitted={handleChangeTemperature}
+        onChange={handleChangeTemperature}        
       />
     </Box>
 
