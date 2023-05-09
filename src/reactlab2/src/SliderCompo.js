@@ -1,7 +1,6 @@
-import './App.css';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { useReducer,useRef,useState,useEffect } from "react";
+import { useReducer } from "react";
 
 const marks = [
   {
@@ -25,10 +24,7 @@ const marks = [
 function reducer(state, action) {
 
   switch (action.type) {
-    case "start":
-      return { ...state, isRunning: true };
-    case "stop":
-      return { ...state, isRunning: false };
+
     case "change_temperature": {
       return {
         valueTemperature: action.ValueTemperature  
@@ -41,34 +37,15 @@ function reducer(state, action) {
 }
 
 const initialState = { 
-  isRunning: false,
   valueTemperature: "20" };
 
 function valuetext(value) {
   return `${value}°C`;
 }
 
-function App() {
+function SliderCompo() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [number, setNumber] = useState(0);
-  const idRef = useRef(20);
-
-  useEffect(() => {
-    console.log("useEffect");
-    if (!state.isRunning) {
-      return;
-    }
-    idRef.current = valuetext;
-    console.log(idRef.current);
-
-    return () => {
-      console.log("useEffect");
-    //  clearInterval(idRef.current);
-    //  idRef.current = 0;
-      console.log(idRef.current);
-    };
-  }, [state.isRunning]);
 
   function handleChangeTemperature(e)
   {
@@ -80,12 +57,6 @@ function App() {
 
   return (
     <>
-
-<button onClick={() => dispatch({ type: "start" })}>Start</button>
-
-<button onClick={() => dispatch({ type: "stop" })}>
-  Stop</button>
-
     <Box sx={{ width: 300 }}>
       <Slider
         aria-label="Custom marks"
@@ -109,4 +80,4 @@ function App() {
   );
 }
 
-export default App;
+export default SliderCompo;
