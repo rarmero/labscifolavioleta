@@ -6,7 +6,7 @@ import BookList from './BookList';
 import BookList2 from './BookList2';
 import RestApiEx1 from './RestApiEx1';
 import RestApiEx2 from './RestApiEx2';
-import RestApiEx3 from './RestApiEx3';
+import RestApiEx3Index from './RestApiEx3Index';
 import RestApiEx4 from './RestApiEx4';
 import RestApiEx1b from './RestApiEx1b'
 import Layout from './route/Layout';
@@ -23,7 +23,7 @@ function App() {
           <Route path="BookList2" element={<BookList2 />} />
           <Route path="RestApiEx1" element={<RestApiEx1 />} />
           <Route path="RestApiEx2" element={<RestApiEx2 />} />
-          <Route path="RestApiEx3" element={<RestApiEx3 />} />
+          <Route path="RestApiEx3Index" element={<RestApiEx3Index />} />
           <Route path="RestApiEx4" element={<RestApiEx4 />} />
           <Route path="*" element={<NoPage />} />
         </Route>

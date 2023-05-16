@@ -27,7 +27,8 @@ function reducer(state, action) {
 
     case "change_temperature": {
       return {
-        valueTemperature: action.ValueTemperature  
+        valueTemperature: action.NextValueTemperature  ,
+         valueColor: action.NextColor
       };
     }
     default: {
@@ -36,8 +37,7 @@ function reducer(state, action) {
   }
 }
 
-const initialState = { 
-  valueTemperature: "20" };
+const initialState = {valueTemperature: "20", valueColor: "blue" };
 
 function valuetext(value) {
   return `${value}°C`;
@@ -49,33 +49,51 @@ function SliderCompo() {
 
   function handleChangeTemperature(e)
   {
+    let c;
+    if (e.target.value >= 0 && e.target.value < 21) {
+      c = "Fuchsia";
+    } else if (e.target.value >= 20 && e.target.value < 60) {
+      c = "blue";
+    } else {
+      c = "red";
+    }
+
     dispatch({
       type: "change_temperature",
-      ValueTemperature: e.target.value
+      NextValueTemperature: e.target.value,
+      NextColor: c
     });
   }
 
   return (
     <>
-    <Box sx={{ width: 300 }}>
-      <Slider
-        aria-label="Custom marks"
-        defaultValue={20}
-        getAriaValueText={valuetext}
-        step={10}
-        valueLabelDisplay="auto"
-        marks={marks}
-        onChange={handleChangeTemperature}        
-      />
-    </Box>
-
-    <label>Temperature</label>{" "}
-    <input value={state.valueTemperature}/>
-
-    <p>
-        <strong>Temperature:</strong> {state.valueTemperature}
-      </p>
-
+    <div>
+        <label>Temperature</label>{" "}
+        <div
+          style={{
+            width: "300px",
+            height: "100px",
+            border: "1px solid #000",
+            background: state.valueColor
+          }}
+        >
+          <center>
+            {" "}
+            <p>{state.valueTemperature}</p>
+          </center>
+        </div>
+        <Box sx={{ width: 300 }}>
+          <Slider
+            aria-label="Custom marks"
+            defaultValue={20}
+            getAriaValueText={valuetext}
+            step={10}
+            valueLabelDisplay="auto"
+            marks={marks}
+            onChange={handleChangeTemperature}            
+          />
+        </Box>
+      </div>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import './App.css';
-import { useReducer,useRef,useState,useEffect } from "react";
+import { useReducer } from "react";
 import SliderCompo from './SliderCompo.js'
 
 
@@ -30,7 +30,6 @@ return(
   <button onClick={() => dispatch({ type: "start" })}>Start</button>
   <button onClick={() => dispatch({ type: "stop" })}>Stop</button>
 
-  <input value={state.isRunning} />
  </>
 );
 
@@ -38,13 +37,32 @@ return(
 
 function ShowSlider({run})
 {
-  if (run){
-    return <>
-    <h1>That's right!</h1><SliderCompo />
+  
+if(run){
+    return(
+    <>
+    <SliderCompo />
     </>
-
-  }
-
+    );
+    }
+    else{
+      return(
+        <>
+        <label>Temperature</label>
+        <div
+        style={{
+          width: "300px",
+          height: "100px",
+          border: "1px solid #000",
+          background: "##f0f0f5"
+        }}
+        >
+        </div>
+        </>
+      );
+    }
+  
 }
+
 
 export default SliderCompoStartStop;

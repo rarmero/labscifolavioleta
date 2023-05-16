@@ -16,7 +16,7 @@ export default function Layout() {
         <span>|</span>
         <Link to="/RestApiEx2">RestApiEx2</Link>
         <span>|</span>
-        <Link to="/RestApiEx3">RestApiEx3</Link>
+        <Link to="/RestApiEx3Index">RestApiEx3Index</Link>
         <span>|</span>
         <Link to="/RestApiEx4">RestApiEx4</Link>
         <span>|</span>
