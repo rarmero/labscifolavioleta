@@ -25,7 +25,7 @@ const RestApiEx3 = ({userRepo,repository,url}) => {
     {isLoading ? (
       <p>Loading...</p>
     ) : (
-
+   <>
     <table>
     <tr>
       <td>{getDate}</td>
@@ -44,7 +44,8 @@ const RestApiEx3 = ({userRepo,repository,url}) => {
      </tr>
 
      </table>       
-
+    
+   </>
     )
    }
 

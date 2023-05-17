@@ -1,4 +1,6 @@
 import RestApiEx3 from './RestApiEx3';
+import PrintGraphic from './PrintGraphic'
+import commits from './commits.json'
 
 export default function RestApiEx3Index() {
 
@@ -56,7 +58,8 @@ export default function RestApiEx3Index() {
       url={'https://api.github.com/repos/rarmero/appwebcifolavioleta/commits'}
       />
    
-   
+   <PrintGraphic items={commits} />
+
     </>
     );
    }
