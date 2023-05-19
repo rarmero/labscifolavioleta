@@ -20,6 +20,8 @@ export default function Layout() {
         <span>|</span>
         <Link to="/RestApiEx4">RestApiEx4</Link>
         <span>|</span>
+        <Link to="/ListOil">ListOil</Link>
+        <span>|</span>
       </nav>
       <Outlet />
       <Footer />

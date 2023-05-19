@@ -11,6 +11,7 @@ import RestApiEx4 from './RestApiEx4';
 import RestApiEx1b from './RestApiEx1b'
 import Layout from './route/Layout';
 import NoPage from "./route/NoPage";
+import ListOil from './oil/ListOil';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="RestApiEx2" element={<RestApiEx2 />} />
           <Route path="RestApiEx3Index" element={<RestApiEx3Index />} />
           <Route path="RestApiEx4" element={<RestApiEx4 />} />
+          <Route path="ListOil" element={<ListOil />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
