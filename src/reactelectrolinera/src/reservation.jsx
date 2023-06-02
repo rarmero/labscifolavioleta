@@ -26,7 +26,7 @@ const Reservation = () => {
 
   useEffect(() => {
           
-            fetch('http://localhost:8090/api/reservations')
+            fetch('http://localhost:8082/api/reservations')
             .then(res => res.json())
             .then(data=>{
                 setPosts(data)
@@ -40,7 +40,7 @@ const Reservation = () => {
             {paginatedPosts.map((post)=>(
                 <div>
                     <h2>{post.dateStart} </h2>
-                    <p>{post.dateStart} </p>
+                    <p>{post.dateEnd} </p>
                 </div>
             ))}
             <div>Page {pageNumber} </div>

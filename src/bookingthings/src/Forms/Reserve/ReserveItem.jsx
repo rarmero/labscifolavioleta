@@ -12,7 +12,7 @@ const ReserveItem = ({ reserve, onDelete, onUpdate }) => {
 
   return (
     <>
-     <h3>ID Client: {reserve.id}</h3>
+     <h3>ID Client: {reserve.idUser}</h3>
       <h3>Client: {reserve.name}</h3>
       <h3>ID Thing: {reserve.idPointCharge}</h3>
       <h3>Thing: {reserve.thing} </h3>
